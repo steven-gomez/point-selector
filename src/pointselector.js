@@ -27,8 +27,8 @@ var floor = Math.floor;
 function getMousePos(canvas, e) {
   var rect = canvas.getBoundingClientRect();
   return {
-    x: e.clientX - rect.left,
-    y: e.clientY - rect.top
+    x: e.clientX - floor(rect.left),
+    y: e.clientY - floor(rect.top)
   };
 }
 
@@ -66,7 +66,21 @@ function drawMarkers(canvas, points) {
   for (var i = 0; i < points.length; i++) {
     drawMarker(ctx, points[i]);
   } 
+  
+  drawPointList(points);
 }   
+
+/**
+ * Add to DOM a list corresponding to click points.
+ */
+function drawPointList(points) {
+  $('#pointlistDiv ul').html('');
+  
+  points.forEach(function(p) {
+    var newPointLi = '<li>'+p.x+', '+p.y+'</li>';
+    $('#pointlistDiv ul').append(newPointLi);
+  });
+}  
     
 /**
  * Image is clicked; keep track of that point and redraw.

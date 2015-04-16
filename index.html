@@ -26,7 +26,7 @@
       text-align: left;
       margin-left: auto;
       margin-right: auto;
-      width: 900px;
+      width: 1200px;
     }
     .center {
       margin-left: auto;
@@ -44,6 +44,14 @@
     .timeLabel {
       display: inline-block;
       width: 120px;
+    }
+    
+    #imageCanvas {
+      border: 1px solid #000000;
+    }
+    
+    #pointList li {
+      list-style-type: none;
     }
     
     /* Styling action categories
@@ -104,17 +112,22 @@ bcbd22 gold
 
       <div class="main-body">
         <h1 id="selectionTitle">Choose an image to display</h1>
-        <div id="imageDiv">
-          <canvas id="imageCanvas" width="800" height="600">
-            Your browser does not support the canvas element. :(
-          </canvas>
-          <!-- Excluding poster for player for now: poster="http://video-js.zencoder.com/oceans-clip.png" -->
-          <!-- <video id="video_1" class="center video-js vjs-default-skin" controls preload="auto" width="800" height="450" data-setup='{"example_option":true}'>
-            <p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a></p>
-          </video>
-          -->
-          <p id="imageTitle" class="lead center"></p>
+        <div class="row">
+          <div id="imageDiv" class="col-lg-8">
+            <canvas id="imageCanvas" width="800" height="600">
+              Your browser does not support the canvas element. :(
+            </canvas>
+            
+            <!-- Below the canvas show the task div -->
+            <div id="imageTaskDiv">
+              <p id="imageTitle" class="lead center"></p>
+            </div>
+          </div>
           
+          <div id="pointlistDiv" class="col-lg-4">
+            <ul id="pointList">
+            </ul>
+          </div>
         </div>
 
         <!--
@@ -158,7 +171,7 @@ bcbd22 gold
         <div id="about">
           <h3>About</h3>
           <p>
-            Point Selector is a web inferface for annotating points of interest in image stimuli.
+            Point Selector is a web interface for annotating points of interest in image stimuli.
           </p>
         </div>
         
