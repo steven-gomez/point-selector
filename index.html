@@ -22,7 +22,7 @@
       padding-top: 50px;
     }
     .main-body {
-      padding: 40px 15px;
+      padding: 0px 15px;
       text-align: left;
       margin-left: auto;
       margin-right: auto;
@@ -34,8 +34,16 @@
       text-align: center;
     }
     .navbar {
-      background: rgba(235, 235, 235, 0.95);
+      background: rgba(0, 0, 0, 1.0);
+      font-weight: 200;
+      text-shadow: none;
+      text-transform: uppercase;
+      /*
+      transition: all 0.3s ease-in-out 0s;		
+      -webkit-transition: all 0.3s ease-in-out 0s;
+      */		
     }
+    
     
     label {
       font-weight: normal;
@@ -44,6 +52,10 @@
     .timeLabel {
       display: inline-block;
       width: 120px;
+    }
+    
+    .meta-info {
+      color: #666666;
     }
     
     #imageCanvas {
@@ -76,6 +88,10 @@ bcbd22 gold
     .Reconfigure { color: #2ca02c; }
     .Speech { color: #9467bd; }
     
+    .cyan { color: cyan; }
+    .yellow { color: yellow; }
+    .magenta { color: magenta; }
+    
     #imageViewport {}
 
     </style>
@@ -96,13 +112,12 @@ bcbd22 gold
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Point Selector</a>
+          <a class="navbar-brand cyan" href="#">Point Selector</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
+            <li class="active"><a href="#about" class="yellow">Next Image</a></li>
+            <li><a href="#contact" class="magenta">Download Annotations</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -111,7 +126,9 @@ bcbd22 gold
     <div class="container">
 
       <div class="main-body">
-        <h1 id="selectionTitle">Choose an image to display</h1>
+        <h2 id="imageCounterTitle"></h2>
+        
+        <!-- New row with image canvas and point info -->
         <div class="row">
           <div id="imageDiv" class="col-lg-8">
             <canvas id="imageCanvas" width="800" height="600">
@@ -129,6 +146,19 @@ bcbd22 gold
             </ul>
           </div>
         </div>
+        <!-- /.row -->
+        
+        <!-- New row with controls to advance and save data -->
+        <div class="row">
+          <div id="advanceDiv" class="col-lg-8">
+
+          </div>
+          
+          <div id="downloadDiv" class="col-lg-4">
+
+          </div>
+        </div>
+        <!-- /.row -->
 
         <!--
         <div class="row">
@@ -168,14 +198,14 @@ bcbd22 gold
         -->
         <!-- /.row -->
         
-        <div id="about">
+        <div id="about" class="meta-info">
           <h3>About</h3>
           <p>
             Point Selector is a web interface for annotating points of interest in image stimuli.
           </p>
         </div>
         
-        <div id="contact">
+        <div id="contact" class="meta-info">
           <h3>Contact</h3>
           <p>
             Point Selector was created by Steve Gomez and is available online at <a href="https://github.com/steven-gomez/point-selector">github.com/steven-gomez/point-selector</a>.

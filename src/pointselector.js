@@ -1,4 +1,3 @@
-
 var canvas = document.getElementById('imageCanvas');
 canvas.onclick = imageClicked;
 canvas.oncontextmenu = imageRightClicked;
@@ -7,13 +6,12 @@ var points = [];
 var rectW = 20, rectH = 20;
 
 // Logic for mouse button events
-var mie = false;
+var mie = false; // TODO: check browser for internet explorer?
 var left, right;
 left = mie ? 1 : 0;
 right = 2;
 
 var img = new Image();
-
 img.onload = function() {
   canvas.getContext('2d').drawImage(img, 0, 0);
 };
@@ -66,7 +64,6 @@ function drawMarkers(canvas, points) {
   for (var i = 0; i < points.length; i++) {
     drawMarker(ctx, points[i]);
   } 
-  
   drawPointList(points);
 }   
 
@@ -88,18 +85,11 @@ function drawPointList(points) {
     $('#pointlistDiv ul').append(newPointLi);
   });
   
-  writePointData(dataStringArray);
+  //writePointData(dataStringArray);
 }  
 
 function writePointData(data) {
   var csvContent = "data:text/csv;charset=utf-8," + data.join('\n');
-  
-  /*
-  data.forEach(function(data_arr, i){
-     dataString = data_arr.join(",");
-     csvContent += dataString+ "\n";
-  }); 
-  */
   
   // Save
   //window.open(encodeURI(csvContent));
@@ -108,8 +98,7 @@ function writePointData(data) {
   var link = document.createElement("a");
   link.setAttribute("href", encodedUri);
   link.setAttribute("download", "my_data.csv");
-
-  link.click(); // This will download the data file named "my_data.csv".
+  link.click(); // 'click' the link to trigger download
 }
     
 /**
@@ -138,7 +127,7 @@ function loadImageIndex(i) {
   var newImg = imageSet.images[i];
   console.log('name '+newImg.name);
   img.src = newImg.path;
-  $('#imageTitle').text(newImg.task);
+  $('#imageCounterTitle').text((i+1)+'/'+imageSet.images.length);
 }
 
 loadImageIndex(0);
