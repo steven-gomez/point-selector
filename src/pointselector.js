@@ -76,11 +76,41 @@ function drawMarkers(canvas, points) {
 function drawPointList(points) {
   $('#pointlistDiv ul').html('');
   
+  var dataString = '';
+  var dataStringArray = [];
   points.forEach(function(p) {
-    var newPointLi = '<li>'+p.x+', '+p.y+'</li>';
+    
+    // dataString for each point is "<imageName>, x, y"
+    dataString = imageSet.images[imageIndex].name + ', '+p.x+', '+p.y;
+    dataStringArray.push(dataString);
+    
+    var newPointLi = '<li>' + dataString + '</li>';
     $('#pointlistDiv ul').append(newPointLi);
   });
+  
+  writePointData(dataStringArray);
 }  
+
+function writePointData(data) {
+  var csvContent = "data:text/csv;charset=utf-8," + data.join('\n');
+  
+  /*
+  data.forEach(function(data_arr, i){
+     dataString = data_arr.join(",");
+     csvContent += dataString+ "\n";
+  }); 
+  */
+  
+  // Save
+  //window.open(encodeURI(csvContent));
+  
+  var encodedUri = encodeURI(csvContent);
+  var link = document.createElement("a");
+  link.setAttribute("href", encodedUri);
+  link.setAttribute("download", "my_data.csv");
+
+  link.click(); // This will download the data file named "my_data.csv".
+}
     
 /**
  * Image is clicked; keep track of that point and redraw.
