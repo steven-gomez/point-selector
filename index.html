@@ -44,6 +44,9 @@
       */		
     }
     
+    .navbar-xs { min-height:28px; height: 28px; }
+    .navbar-xs .navbar-brand{ padding: 0px 12px;font-size: 16px;line-height: 28px; }
+    .navbar-xs .navbar-nav > li > a {  padding-top: 0px; padding-bottom: 0px; line-height: 28px; }
     
     label {
       font-weight: normal;
@@ -103,7 +106,7 @@ bcbd22 gold
     
   </head>
   <body>
-    <nav class="navbar navbar-fixed-top">
+    <nav class="navbar navbar-xs navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -116,8 +119,8 @@ bcbd22 gold
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="#about" class="yellow">Next Image</a></li>
-            <li><a href="#contact" class="magenta">Download Annotations</a></li>
+            <li class="active"><a id="nextImgAnchor" class="yellow">Next Image</a></li>
+            <li><a id="downloadAnchor" class="magenta">Download Annotations</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -137,7 +140,7 @@ bcbd22 gold
             
             <!-- Below the canvas show the task div -->
             <div id="imageTaskDiv">
-              <p id="imageTitle" class="lead center"></p>
+              <p id="imageTask" class="lead center"></p>
             </div>
           </div>
           
@@ -146,56 +149,6 @@ bcbd22 gold
             </ul>
           </div>
         </div>
-        <!-- /.row -->
-        
-        <!-- New row with controls to advance and save data -->
-        <div class="row">
-          <div id="advanceDiv" class="col-lg-8">
-
-          </div>
-          
-          <div id="downloadDiv" class="col-lg-4">
-
-          </div>
-        </div>
-        <!-- /.row -->
-
-        <!--
-        <div class="row">
-          <div id="logs-info" class="col-md-3">
-            <h3>Logs</h3>
-            <div id="videolist">
-              <ul>
-                <li><a class="log_item" onclick="loadVideolog('1', 'video_1');">official_1.mp4 <span class="indicator-span" aria-hidden="true"></span></a></li>
-                <li><a class="log_item" onclick="loadVideolog('2', 'video_1');">official_2.mp4 <span class="indicator-span" aria-hidden="true"></span></a></li>
-                <li><a class="log_item" onclick="loadVideolog('3', 'video_1');">official_3.mp4 <span class="indicator-span" aria-hidden="true"></span></a></li>
-                <li><a class="log_item" onclick="loadVideolog('4', 'video_1');">official_4.mp4 <span class="indicator-span" aria-hidden="true"></span></a></li>
-                <li><a class="log_item" onclick="loadVideolog('5', 'video_1');">official_5.mp4 <span class="indicator-span" aria-hidden="true"></span></a></li>
-                <li><a class="log_item" onclick="loadVideolog('6', 'video_1');">official_6.mp4 <span class="indicator-span" aria-hidden="true"></span></a></li>
-                <li><a class="log_item" onclick="loadVideolog('7', 'video_1');">official_7.mp4 <span class="indicator-span" aria-hidden="true"></span></a></li>
-                <li><a class="log_item" onclick="loadVideolog('8', 'video_1');">official_8.mp4 <span class="indicator-span" aria-hidden="true"></span></a></li>
-                <li><a class="log_item" onclick="loadVideolog('9', 'video_1');">official_9.mp4 <span class="indicator-span" aria-hidden="true"></span></a></li>
-                <li><a class="log_item" onclick="loadVideolog('10', 'video_1');">official_10.mp4 <span class="indicator-span" aria-hidden="true"></span></a></li>
-              </ul>
-            </div>
-          </div>
-        
-          <div id="filters-info" class="col-md-3">
-            <h3>Filters</h3>
-            <div id="filterlist">
-              <ul></ul>
-            </div>
-          </div>
-          
-          <div id="actions-info" class="col-md-6">
-            <h3>Actions</h3>
-            <div id="actionlist">
-              <ul></ul>
-            </div>
-          </div>
-          
-        </div>
-        -->
         <!-- /.row -->
         
         <div id="about" class="meta-info">

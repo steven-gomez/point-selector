@@ -2,8 +2,8 @@ var canvas = document.getElementById('imageCanvas');
 canvas.onclick = imageClicked;
 canvas.oncontextmenu = imageRightClicked;
 
-var points = [];
 var rectW = 20, rectH = 20;
+var currentImageIndex = -1;
 
 // Logic for mouse button events
 var mie = false; // TODO: check browser for internet explorer?
@@ -16,7 +16,6 @@ img.onload = function() {
   canvas.getContext('2d').drawImage(img, 0, 0);
 };
 
-var imageIndex = 0;
 var floor = Math.floor;
 
 /**
@@ -54,9 +53,10 @@ function drawMarker(ctx, p) {
 }
   
 /**
- * Draw markers on the canvas corresponding to click points.
+ * Draw markers on the canvas corresponding to click points on the current image.
  */
-function drawMarkers(canvas, points) {
+function drawMarkers(canvas) {
+  var points = imageSet.images[currentImageIndex].points;
   var ctx = canvas.getContext('2d');
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   ctx.drawImage(img, 0, 0);
@@ -64,21 +64,23 @@ function drawMarkers(canvas, points) {
   for (var i = 0; i < points.length; i++) {
     drawMarker(ctx, points[i]);
   } 
-  drawPointList(points);
+  drawPointList();
 }   
 
 /**
- * Add to DOM a list corresponding to click points.
+ * Add to DOM a list corresponding to click points on the current image.
  */
 function drawPointList(points) {
-  $('#pointlistDiv ul').html('');
-  
+  var points = imageSet.images[currentImageIndex].points;
   var dataString = '';
   var dataStringArray = [];
+   
+  $('#pointlistDiv ul').html('');
+  
   points.forEach(function(p) {
     
     // dataString for each point is "<imageName>, x, y"
-    dataString = imageSet.images[imageIndex].name + ', '+p.x+', '+p.y;
+    dataString = imageSet.images[currentImageIndex].name + ', '+p.x+', '+p.y;
     dataStringArray.push(dataString);
     
     var newPointLi = '<li>' + dataString + '</li>';
@@ -102,12 +104,14 @@ function writePointData(data) {
 }
     
 /**
- * Image is clicked; keep track of that point and redraw.
+ * When the image is clicked; keep track of that point in a data structure
+ * associated with the current image, then redraw.
  */
 function imageClicked(e) {
+  var points = imageSet.images[currentImageIndex].points;
   var mousePos = getMousePos(canvas, e);
   points.push({'x': mousePos.x, 'y': mousePos.y});
-  drawMarkers(canvas, points);
+  drawMarkers(canvas);
   return false;
 }
 
@@ -115,6 +119,7 @@ function imageClicked(e) {
  * Image is right-clicked; pop point and redraw.
  */
 function imageRightClicked(e) {
+  var points = imageSet.images[currentImageIndex].points;
   points.pop();
   drawMarkers(canvas, points);
   return false;
@@ -124,10 +129,43 @@ function imageRightClicked(e) {
  * Load image to canvas based on index in imageset.
  */
 function loadImageIndex(i) {
+  if (imageSet.images.length === 0 || i < 0 || i >= imageSet.images.length) {
+    console.log('Error: loadImageIndex requires valid image index '
+      + 'as argument: given \''+i+'\', array length is '+imageSet.images.length);
+      
+    // If off-by-one error at the end of the non-empty images array (e.g., trying to increment
+    // the last valid index), decrement the currentImageIndex to fail gracefully.
+    if (i === imageSet.images.length && imageSet.images.length > 0) {
+      currentImageIndex--;
+    }  
+    return false;
+  }
   var newImg = imageSet.images[i];
+  
+  // Augment the imageSet data with a new array for clicks on this image
+  imageSet.images[i].points = [];
+  
   console.log('name '+newImg.name);
   img.src = newImg.path;
   $('#imageCounterTitle').text((i+1)+'/'+imageSet.images.length);
+  $('#imageTask').text(imageSet.images[i].task);
 }
 
-loadImageIndex(0);
+/* Set up event handlers ---------------------------- */
+
+$('#nextImgAnchor').click(function() {
+  loadImageIndex(++currentImageIndex);
+  drawMarkers(canvas);
+});
+
+$('#downloadAnchor').click(function() {
+  loadImageIndex(++currentImageIndex);
+});
+
+/* Load initial image if there is one --------------- */
+
+if (imageSet.images.length > 0) {
+  // Start with first image in array
+  currentImageIndex = 0;
+  loadImageIndex(currentImageIndex);
+}
