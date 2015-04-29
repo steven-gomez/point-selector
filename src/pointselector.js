@@ -5,6 +5,9 @@ canvas.oncontextmenu = imageRightClicked;
 var rectW = 20, rectH = 20;
 var currentImageIndex = -1;
 
+var maxWidth = 800;
+var maxHeight = 800;
+
 // Logic for mouse button events
 var mie = false; // TODO: check browser for internet explorer?
 var left, right;
@@ -13,7 +16,19 @@ right = 2;
 
 var img = new Image();
 img.onload = function() {
-  canvas.getContext('2d').drawImage(img, 0, 0);
+  var w = this.width, h = this.height;
+  var scale = 0;
+  
+  // If landscape aspect, get scale factor based on max dimension size
+  if (w > h) {
+    scale = maxWidth / w;
+  } else {
+    scale = maxHeight / h;
+  }
+  canvas.width = scale * w;
+  canvas.height = scale * h;
+  canvas.getContext('2d').drawImage(img, 0, 0, scale * w, scale * h);
+
 };
 
 var floor = Math.floor;
@@ -90,16 +105,12 @@ function drawPointList(points) {
   //writePointData(dataStringArray);
 }  
 
-function writePointData(data) {
+function writePointData(fileName, data) {
   var csvContent = "data:text/csv;charset=utf-8," + data.join('\n');
-  
-  // Save
-  //window.open(encodeURI(csvContent));
-  
   var encodedUri = encodeURI(csvContent);
   var link = document.createElement("a");
   link.setAttribute("href", encodedUri);
-  link.setAttribute("download", "my_data.csv");
+  link.setAttribute("download", fileName);
   link.click(); // 'click' the link to trigger download
 }
     
@@ -145,21 +156,55 @@ function loadImageIndex(i) {
   // Augment the imageSet data with a new array for clicks on this image
   imageSet.images[i].points = [];
   
-  console.log('name '+newImg.name);
+  // Load image into the canvas by setting the img source and redrawing on context
+  console.log('Loading '+newImg.name);
+  
   img.src = newImg.path;
+  
   $('#imageCounterTitle').text((i+1)+'/'+imageSet.images.length);
   $('#imageTask').text(imageSet.images[i].task);
 }
 
+/**
+ * Load next image to canvas based on the current one.
+ */
+function loadNextImage() {
+  loadImageIndex(++currentImageIndex);
+  drawMarkers(canvas);
+}
+
+/**
+ * Download all point data as csv.
+ */
+function downloadPointsCsv(fileName) {
+  var allPointData = [];
+  imageSet.images.forEach(function(img) {
+    
+    // If the image has points associated with it, loop through that are
+    // and point a representation of each point into the cumulative points
+    // data structure.
+    if (img.points) {
+      
+      img.points.forEach(function(p) {
+        // dataString for each point is "<imageName>, x, y"
+        dataString = img.name + ', '+p.x+', '+p.y;
+        allPointData.push(dataString);
+        console.log("Pushing point: "+dataString);
+      });
+    }
+  });
+  
+  writePointData(fileName, allPointData);
+}
+  
 /* Set up event handlers ---------------------------- */
 
 $('#nextImgAnchor').click(function() {
-  loadImageIndex(++currentImageIndex);
-  drawMarkers(canvas);
+  loadNextImage();
 });
 
 $('#downloadAnchor').click(function() {
-  loadImageIndex(++currentImageIndex);
+  downloadPointsCsv('test.csv');
 });
 
 /* Load initial image if there is one --------------- */
