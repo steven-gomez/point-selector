@@ -1,0 +1,85 @@
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  padding-top: 50px;
+  margin-bottom: 28px;
+}
+.main-body {
+  padding: 0px 15px;
+  text-align: left;
+  margin-left: auto;
+  margin-right: auto;
+  width: 1200px;
+}
+.center {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+.navbar {
+  background: rgba(0, 0, 0, 1.0);
+  font-weight: 200;
+  text-shadow: none;
+  text-transform: uppercase;
+  /*
+  transition: all 0.3s ease-in-out 0s;		
+  -webkit-transition: all 0.3s ease-in-out 0s;
+  */		
+}
+
+.navbar-xs { min-height: 28px; height: 28px; }
+
+.navbar-xs .navbar-brand {
+  padding: 0px 12px; 
+  font-size: 16px; 
+  line-height: 28px;
+}
+
+.navbar-xs .navbar-nav > li > a {  padding-top: 0px; padding-bottom: 0px; line-height: 28px; }
+
+.footer {
+  position: absolute;
+  text-align: left;
+  bottom: 0;
+  width: 100%;
+  
+  /* Set the fixed height of the footer here */
+  min-height: 28px;
+  height: 28px;
+  padding: 0px 12px; font-size: 14px; line-height: 28px; 
+  
+  font-weight: 200;
+  text-shadow: none;
+  color: #ccc;
+  background: rgba(0, 0, 0, 1.0);
+}
+
+.footer a { color: cyan;}
+
+label {
+  font-weight: normal;
+}
+
+.timeLabel {
+  display: inline-block;
+  width: 120px;
+}
+
+.taskText {
+  font-size: 16pt;
+  padding: 15px 0px 0px 0px;
+}
+
+#imageCanvas {
+  border: 1px solid #000000;
+}
+
+#pointList li {
+  list-style-type: none;
+}
+
+.cyan { color: cyan; }
+.yellow { color: yellow; }
+.magenta { color: magenta; }

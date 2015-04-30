@@ -17,87 +17,7 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
       
-    <style>
-    body {
-      padding-top: 50px;
-    }
-    .main-body {
-      padding: 0px 15px;
-      text-align: left;
-      margin-left: auto;
-      margin-right: auto;
-      width: 1200px;
-    }
-    .center {
-      margin-left: auto;
-      margin-right: auto;
-      text-align: center;
-    }
-    .navbar {
-      background: rgba(0, 0, 0, 1.0);
-      font-weight: 200;
-      text-shadow: none;
-      text-transform: uppercase;
-      /*
-      transition: all 0.3s ease-in-out 0s;		
-      -webkit-transition: all 0.3s ease-in-out 0s;
-      */		
-    }
-    
-    .navbar-xs { min-height:28px; height: 28px; }
-    .navbar-xs .navbar-brand{ padding: 0px 12px;font-size: 16px;line-height: 28px; }
-    .navbar-xs .navbar-nav > li > a {  padding-top: 0px; padding-bottom: 0px; line-height: 28px; }
-    
-    label {
-      font-weight: normal;
-    }
-    
-    .timeLabel {
-      display: inline-block;
-      width: 120px;
-    }
-    
-    .meta-info {
-      color: #666666;
-    }
-    
-    #imageCanvas {
-      border: 1px solid #000000;
-    }
-    
-    #pointList li {
-      list-style-type: none;
-    }
-    
-    /* Styling action categories
-       -------------------------
-       d3 category10 colors below
-    
-1f77b4 dark blue
-ff7f0e orange
-2ca02c green
-d62728 red
-9467bd purple
-8c564b brown
-e377c2 pink
-7f7f7f gray
-bcbd22 gold
-17becf cyan
-    ---------------------------- */
-    .Explore { color: #1f77b4; }
-    .Filter { color: #d62728;}
-    .Retrieve { color: #ff7f0e; }
-    .Select { color: #8c564b;}
-    .Reconfigure { color: #2ca02c; }
-    .Speech { color: #9467bd; }
-    
-    .cyan { color: cyan; }
-    .yellow { color: yellow; }
-    .magenta { color: magenta; }
-    
-    #imageViewport {}
-
-    </style>
+    <link rel="stylesheet" href="css/pointselector.css">
 
     <script type="text/javascript">
     window.onload = function() {
@@ -140,7 +60,7 @@ bcbd22 gold
             
             <!-- Below the canvas show the task div -->
             <div id="imageTaskDiv">
-              <p id="imageTask" class="lead center"></p>
+              <p id="imageTask" class="taskText"></p>
             </div>
           </div>
           
@@ -151,18 +71,14 @@ bcbd22 gold
         </div>
         <!-- /.row -->
         
-        <div id="about" class="meta-info">
-          <h3>About</h3>
-          <p>
-            Point Selector is a web interface for annotating points of interest in image stimuli.
-          </p>
-          <p>
-            Fork this code online at <a href="https://github.com/steven-gomez/point-selector">github.com/steven-gomez/point-selector</a>.
-          </p>
-        </div>
-        
       </div><!-- /.main-body -->
     </div><!-- /.container -->
+    
+    <footer class="footer">
+      <div class="container">
+        <p>Point Selector is a web interface for annotating points of interest in image stimuli. Fork this code online at <a href="https://github.com/steven-gomez/point-selector">github.com/steven-gomez/point-selector</a>.</p>
+      </div>
+    </footer>
   
     <!-- Plugins -->
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
