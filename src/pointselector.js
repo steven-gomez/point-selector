@@ -2,6 +2,8 @@ var canvas = document.getElementById('imageCanvas');
 canvas.onclick = imageClicked;
 canvas.oncontextmenu = imageRightClicked;
 
+var outFile = 'pointselector.csv';
+
 var rectW = 20, rectH = 20;
 var currentImageIndex = -1;
 
@@ -148,6 +150,13 @@ function loadImageIndex(i) {
     // the last valid index), decrement the currentImageIndex to fail gracefully.
     if (i === imageSet.images.length && imageSet.images.length > 0) {
       currentImageIndex--;
+      
+      // Automatically download results and show message
+      downloadPointsCsv(outFile);
+      $('#imageDiv').hide();
+      $('#imageCounterTitle').hide();
+      $('#imageTaskDiv').hide();
+      $('#headerText').text('Thank you!');
     }  
     return false;
   }
@@ -204,7 +213,7 @@ $('#nextImgAnchor').click(function() {
 });
 
 $('#downloadAnchor').click(function() {
-  downloadPointsCsv('test.csv');
+  downloadPointsCsv(outFile);
 });
 
 /* Load initial image if there is one --------------- */
