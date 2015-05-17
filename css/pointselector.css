@@ -80,6 +80,11 @@ label {
   list-style-type: none;
 }
 
+#headerText {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
 .cyan { color: cyan; }
 .yellow { color: yellow; }
 .magenta { color: magenta; }

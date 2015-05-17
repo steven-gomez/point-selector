@@ -156,6 +156,8 @@ function loadImageIndex(i) {
       $('#imageDiv').hide();
       $('#imageCounterTitle').hide();
       $('#imageTaskDiv').hide();
+      $('#pointlistDiv').hide();
+      
       $('#headerText').text('Thank you!');
     }  
     return false;
